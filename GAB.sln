@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAB", "GAB.csproj", "{95B571AF-6D09-4664-BE15-86BBD38FC5FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAB.Test", "GAB.Test\GAB.Test.csproj", "{665CA5D1-D74B-4085-A572-1815F004B37A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.Packager", "NuGet.Packager\NuGet.Packager.csproj", "{0451BAEF-DF2E-4B98-8644-94EE9415E389}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAB.Doc", "GAB.Doc\GAB.Doc.csproj", "{C384857A-333F-43D4-B807-42DD3AAD7B1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95B571AF-6D09-4664-BE15-86BBD38FC5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B571AF-6D09-4664-BE15-86BBD38FC5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B571AF-6D09-4664-BE15-86BBD38FC5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B571AF-6D09-4664-BE15-86BBD38FC5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665CA5D1-D74B-4085-A572-1815F004B37A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665CA5D1-D74B-4085-A572-1815F004B37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665CA5D1-D74B-4085-A572-1815F004B37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665CA5D1-D74B-4085-A572-1815F004B37A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C384857A-333F-43D4-B807-42DD3AAD7B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C384857A-333F-43D4-B807-42DD3AAD7B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C384857A-333F-43D4-B807-42DD3AAD7B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C384857A-333F-43D4-B807-42DD3AAD7B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alexismoura.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = GAB.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = GAB.Test\\GAB.Test.csproj
+		SccProjectName2 = GAB.Test
+		SccLocalPath2 = GAB.Test
+		SccProjectUniqueName3 = NuGet.Packager\\NuGet.Packager.csproj
+		SccProjectName3 = NuGet.Packager
+		SccLocalPath3 = NuGet.Packager
+		SccProjectUniqueName4 = GAB.Doc\\GAB.Doc.csproj
+		SccProjectName4 = GAB.Doc
+		SccLocalPath4 = GAB.Doc
+	EndGlobalSection
+EndGlobal
