@@ -37,8 +37,9 @@ namespace GAB
 
             this.providerConfig = providerConfig;
 
-            new CodeFirst(providerConfig).CreateDataBase()
-                                         .CreateTable(TableName,this.Keys, collectionPersistenceProperties);
+            //if (providerConfig.Provider.Name.ToUpper().Contains("SQLITE"))
+                new CodeFirst(providerConfig).CreateDataBase()
+                                         .CreateTable(TableName, this.Keys, collectionPersistenceProperties);
         }
 
         #endregion

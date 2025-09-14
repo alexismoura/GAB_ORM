@@ -323,62 +323,61 @@ namespace GAB
 
         #region MySql
 
-        private CodeFirst CreateTableMySql(string tableName, PersistencePropertyCollection keys
-                                        , PersistencePropertyCollection props)
+        private CodeFirst CreateTableMySql(string tableName, PersistencePropertyCollection keys, PersistencePropertyCollection props)
         {
             var conn = this.ProviderConfiguration.Provider.CreateConnection();
             conn.ConnectionString = this.ProviderConfiguration.ConnectionString;
             IDbCommand cmd = this.ProviderConfiguration.Provider.CreateCommand();
             cmd.Connection = conn;
-                
 
-            if (TableExist == null || !TableExist.Any(x => x == "MYSQL_" + tableName))
+            try
             {
-                var sql = "SHOW TABLES LIKE '" + tableName + "'";
-                cmd.CommandText = sql;
-
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
-
-                var exist = cmd.ExecuteScalar();
-                if (exist != null)
-                    TableExist.Add("MYSQL_" + tableName);
-                else
+                if (TableExist == null || !TableExist.Any(x => x == "MYSQL_" + tableName))
                 {
-                    // Build query.
-                    var query = "CREATE TABLE " + tableName + "(\n";
-                    var decls = keys != null && keys.Count() > 0 ? keys.Select(p => "" + p.Name + " " + SqlTypeMySql(p, true) + " UNSIGNED AUTO_INCREMENT PRIMARY KEY").ToList()
-                                                                 : new List<string>();
-                    decls.AddRange(props.Where(p => keys.Any(y => y != p)).Select(p => "" + p.Name + " " + SqlTypeMySql(p, true) + " "));
-                    //decls.AddRange(props.Select(p => "" + p.Name + " " + SqlTypeMySql(p, true) + " "));
-                    var decl = string.Join(",\n", decls.ToArray());
-                    query += decl;
-                    query += ")";
+                    var sql = "SHOW TABLES LIKE '" + tableName + "'";
+                    cmd.CommandText = sql;
 
-                    try
+                    if (conn.State != ConnectionState.Open)
+                        conn.Open();
+
+                    var exist = cmd.ExecuteScalar();
+                    if (exist != null)
                     {
-                        cmd.CommandText = query;
-
-                        if (conn.State != ConnectionState.Open)
-                            conn.Open();
-
-                        cmd.ExecuteNonQuery();
                         TableExist.Add("MYSQL_" + tableName);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        throw ex;
-                    }
-                    finally
-                    {
-                        if (conn.State != ConnectionState.Closed)
-                            conn.Close();
-                    }
+                        var query = "CREATE TABLE " + tableName + "(\n";
+                        var decls = keys != null && keys.Any()
+                            ? keys.Select(p => $"{p.Name} {SqlTypeMySql(p, true)} UNSIGNED AUTO_INCREMENT PRIMARY KEY").ToList()
+                            : new List<string>();
 
+                        decls.AddRange(props.Where(p => keys.All(y => y != p))
+                            .Select(p => $"{p.Name} {SqlTypeMySql(p, true)}"));
+
+                        query += string.Join(",\n", decls);
+                        query += ")";
+
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+
+                        TableExist.Add("MYSQL_" + tableName);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao criar tabela {tableName}: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close(); // Sempre fecha a conexão
+            }
+
             return this;
         }
+
 
         private string SqlTypeMySql(PersistencePropertyAttribute prop, bool storeDateTimeAsTicks)
         {
