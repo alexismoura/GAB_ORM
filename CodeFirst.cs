@@ -48,7 +48,7 @@ namespace GAB
                     CreateDataBaseSQLce();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -67,7 +67,7 @@ namespace GAB
                 else if (this.ProviderConfiguration.Provider.Name.ToUpper().Contains("MYSQL"))
                     this.CreateTableMySql(tableName, collectionKeys, collectionPersistenceProperties);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -133,7 +133,7 @@ namespace GAB
                 cmd.CommandText = constraint;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -169,7 +169,7 @@ namespace GAB
                 if (tableResult != null && tableResult.Equals(tableName))
                     result = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -284,7 +284,7 @@ namespace GAB
 
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //SendMessageDebugTrace("CommandText: " + cmd.CommandText);
             }
@@ -392,18 +392,24 @@ namespace GAB
             }
             else if (clrType == typeof(Single) || clrType == typeof(Double) || clrType == typeof(Decimal))
             {
-                return "real(7,4)";
+                return "decimal(10,2)";
             }
             else if (clrType == typeof(String))
             {
                 int? len = prop.Size;
 
-                if (len.HasValue && len.Value <= 4000)
-                    return "varchar(" + (len.Value == 0 ? 4000 : len.Value) + ")";
+                if (len.HasValue)
+                {
+                    if (len.Value <= 255)
+                        return "varchar(" + (len.Value == 0 ? 255 : len.Value) + ")";
+                    else
+                        return "text";
+                }
                 else
-                    return "text";
-
-                return "varchar";
+                {
+                    // Tamanho padrão menor para evitar problema de row size
+                    return "varchar(255)";
+                }
             }
             else if (clrType == typeof(TimeSpan))
             {

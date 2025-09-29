@@ -7,11 +7,11 @@ using System.Reflection;
 namespace GAB
 {
     /// <summary>
-    /// Provider que irá fezer o controle DAO refrenciado para o projeto.
+    /// Provider que irï¿½ fezer o controle DAO refrenciado para o projeto.
     /// </summary>
     public class Provider
     {
-        #region Variáveis Locais
+        #region Variï¿½veis Locais
 
         private Type m_ConnectionType;
         private string m_ConnectionTypeName;
@@ -31,7 +31,7 @@ namespace GAB
         private bool m_GenerateIdentity = false;
 
         /// <summary>
-        /// Identifica se os comando serão executados um de cada vez.
+        /// Identifica se os comando serï¿½o executados um de cada vez.
         /// </summary>
         private bool m_ExecuteCommandsOneAtATime = false;
 
@@ -40,7 +40,7 @@ namespace GAB
         #region Propriedades
 
         /// <summary>
-        /// Identifica se os comando serão executados um de cada vez.
+        /// Identifica se os comando serï¿½o executados um de cada vez.
         /// </summary>
         public bool ExecuteCommandsOneAtATime
         {
@@ -57,8 +57,8 @@ namespace GAB
         }
 
         /// <summary>
-        /// Identifica se a identidade da chaves da tabelas serão geradas pelo BD ou pela aplicação.
-        /// True quando a aplicação gera a identidade.
+        /// Identifica se a identidade da chaves da tabelas serï¿½o geradas pelo BD ou pela aplicaï¿½ï¿½o.
+        /// True quando a aplicaï¿½ï¿½o gera a identidade.
         /// </summary>
         [System.ComponentModel.DefaultValue(false)]
         public bool GenerateIdentity
@@ -68,7 +68,7 @@ namespace GAB
         }
 
         /// <summary>
-        /// Carrega o tipo de classe que cuida da conexão.
+        /// Carrega o tipo de classe que cuida da conexï¿½o.
         /// </summary>
         public Type ConnectionType
         {
@@ -79,7 +79,7 @@ namespace GAB
                     m_ConnectionType = ProviderAssembly.GetType(m_ConnectionTypeName, false);
                     if (m_ConnectionType == null)
                     {
-                        throw new Exception(string.Format("Não é possível carrega a classe de conexão: {0} do assmbly: {1}", m_ConnectionTypeName, m_AssemblyName));
+                        throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel carrega a classe de conexï¿½o: {0} do assmbly: {1}", m_ConnectionTypeName, m_AssemblyName));
                     }
                 }
                 return m_ConnectionType;
@@ -99,7 +99,7 @@ namespace GAB
                     m_CommandType = ProviderAssembly.GetType(m_CommandTypeName, false);
                     if (m_CommandType == null)
                     {
-                        throw new Exception(string.Format("Não é possível carrega a classe de commando: {0} do assmbly: {1}", m_CommandTypeName, m_AssemblyName));
+                        throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel carrega a classe de commando: {0} do assmbly: {1}", m_CommandTypeName, m_AssemblyName));
                     }
                 }
                 return m_CommandType;
@@ -119,7 +119,7 @@ namespace GAB
                     m_AdapterType = ProviderAssembly.GetType(m_AdapterTypeName, false);
                     if (m_AdapterType == null)
                     {
-                        throw new Exception(string.Format("Não é possível carrega a classe de adapter: {0} do assmbly: {1}", m_AdapterTypeName, m_AssemblyName));
+                        throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel carrega a classe de adapter: {0} do assmbly: {1}", m_AdapterTypeName, m_AssemblyName));
                     }
                 }
                 return m_AdapterType;
@@ -139,7 +139,7 @@ namespace GAB
                     m_ParameterType = ProviderAssembly.GetType(m_ParameterTypeName, false);
                     if (m_ParameterType == null)
                     {
-                        throw new Exception(string.Format("Não é possível carrega a classe de paramater: {0} do assmbly: {1}", m_ParameterTypeName, m_AssemblyName));
+                        throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel carrega a classe de paramater: {0} do assmbly: {1}", m_ParameterTypeName, m_AssemblyName));
                     }
                 }
                 return m_ParameterType;
@@ -182,7 +182,7 @@ namespace GAB
         /// <param name="command">Type do command.</param>
         public Provider(string name, Type connection, Type dataAdapter, Type command)
         {
-            // Verificação de tipos nulos
+            // Verificaï¿½ï¿½o de tipos nulos
             if (connection == null)
                 throw new ArgumentNullException("connection");
             else if (dataAdapter == null)
@@ -213,7 +213,7 @@ namespace GAB
 
         public Provider(string name, Type connection, Type dataAdapter, Type command, Type parameter, string parameterPrefix)
         {
-            // Verificação de tipos nulos
+            // Verificaï¿½ï¿½o de tipos nulos
             if (connection == null)
                 throw new ArgumentNullException("connection");
             else if (dataAdapter == null)
@@ -297,10 +297,10 @@ namespace GAB
 
         #endregion
 
-        #region Métodos Locais
+        #region Mï¿½todos Locais
 
         /// <summary>
-        /// Carrega o assembly do do namespace que contém os objetos de acesso.
+        /// Carrega o assembly do do namespace que contï¿½m os objetos de acesso.
         /// </summary>
         public Assembly ProviderAssembly
         {
@@ -308,13 +308,13 @@ namespace GAB
             {
                 if (providerAssembly == null)
                 {
-                    // Verifica se o nome apresentado contém as informações completas sobre o 
+                    // Verifica se o nome apresentado contï¿½m as informaï¿½ï¿½es completas sobre o 
                     // Library de acesso a dados
                     if (m_AssemblyName.IndexOf(',') == -1)
                     {
 #if !PocketPC
                         // Carrega o assembly com dados parciais
-                        providerAssembly = Assembly.LoadWithPartialName(m_AssemblyName);
+                        providerAssembly = Assembly.Load(m_AssemblyName);
 #else
                         providerAssembly = Assembly.Load(m_AssemblyName);
 #endif
@@ -331,10 +331,10 @@ namespace GAB
 
         #endregion
 
-        #region Métodos Públicas
+        #region Mï¿½todos Pï¿½blicas
 
         /// <summary>
-        /// Cria uma instância do connection que o provider representa.
+        /// Cria uma instï¿½ncia do connection que o provider representa.
         /// </summary>
         /// <returns>Connection.</returns>
         public IDbConnection CreateConnection()
@@ -343,13 +343,13 @@ namespace GAB
             obj = Activator.CreateInstance(ConnectionType);
 
             if (obj == null)
-                throw new Exception(string.Format("Não é possível criar a classe connection: {0} do assmbly: {1}", m_ConnectionTypeName, m_AssemblyName));
+                throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel criar a classe connection: {0} do assmbly: {1}", m_ConnectionTypeName, m_AssemblyName));
 
             return (IDbConnection)obj;
         }
 
         /// <summary>
-        /// Cria uma instância do command que o provider representa.
+        /// Cria uma instï¿½ncia do command que o provider representa.
         /// </summary>
         /// <returns>Command.</returns>
         public IDbCommand CreateCommand()
@@ -358,33 +358,33 @@ namespace GAB
             obj = Activator.CreateInstance(CommandType);
 
             if (obj == null)
-                throw new Exception(string.Format("Não é possível criar a classe command: {0} do assmbly: {1}", m_CommandTypeName, m_AssemblyName));
+                throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel criar a classe command: {0} do assmbly: {1}", m_CommandTypeName, m_AssemblyName));
 
             return (IDbCommand)obj;
         }
 
         /// <summary>
-        /// Cria uma instância do DataAdapter que o provider representa.
+        /// Cria uma instï¿½ncia do DataAdapter que o provider representa.
         /// </summary>
         /// <returns>DataAdapter.</returns>
         public IDbDataAdapter CreateDataAdapter()
         {
             object obj = Activator.CreateInstance(DataAdapterType);
             if (obj == null)
-                throw new Exception(string.Format("Não é possível criar a classe adapter: {0} do assmbly: {1}", m_AdapterTypeName, m_AssemblyName));
+                throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel criar a classe adapter: {0} do assmbly: {1}", m_AdapterTypeName, m_AssemblyName));
 
             return (IDbDataAdapter)obj;
         }
 
         /// <summary>
-        /// Cria uma instância do Parameter que o provider representa.
+        /// Cria uma instï¿½ncia do Parameter que o provider representa.
         /// </summary>
         /// <returns>Parameter.</returns>
         public System.Data.Common.DbParameter CreateParameter()
         {
             object obj = Activator.CreateInstance(ParameterType);
             if (obj == null)
-                throw new Exception(string.Format("Não é possível criar a classe parameter: {0} do assmbly: {1}", m_ParameterTypeName, m_AssemblyName));
+                throw new Exception(string.Format("Nï¿½o ï¿½ possï¿½vel criar a classe parameter: {0} do assmbly: {1}", m_ParameterTypeName, m_AssemblyName));
 
             return (System.Data.Common.DbParameter)obj;
         }

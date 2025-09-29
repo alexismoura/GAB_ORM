@@ -206,7 +206,7 @@ namespace GAB
             else return value;
         }
 
-        // <summary>
+        /// <summary>
         /// Converte o valor do objeto para o tipo especifico.
         /// </summary>
         /// <param name="value">Valor.</param>

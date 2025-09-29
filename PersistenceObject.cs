@@ -151,7 +151,7 @@ namespace GAB
                         {
                             ((IDictionary<string, object>)obj)[dReader.GetName(i)] = dReader[i];
                         }
-                        catch(Exception ex)
+                        catch(Exception)
                         {
                             ((IDictionary<string, object>)obj)[dReader.GetName(i)] = null;
                         }
